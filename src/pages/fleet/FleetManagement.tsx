@@ -23,29 +23,62 @@ export const FleetManagement: React.FC = () => {
       value: '45',
       change: '+3 this month',
       icon: Car,
-      trend: 'up'
+      trend: 'up' as const,
     },
     {
       title: 'Active Drivers',
       value: '38',
       change: '+2 from last week',
       icon: Users,
-      trend: 'up'
+      trend: 'up' as const,
     },
     {
       title: 'Average Trip Time',
       value: '28 mins',
       change: '-2 mins from last week',
       icon: Clock,
-      trend: 'down'
+      trend: 'down' as const,
     },
     {
       title: 'Fleet Rating',
       value: '4.8',
       change: '+0.2 from last month',
       icon: AlertCircle,
-      trend: 'up'
+      trend: 'up' as const,
     }
+  ];
+
+  const vehicles = [
+    {
+      id: '1',
+      model: 'Toyota Camry',
+      plate: 'ABC123',
+      status: 'active' as const,
+      lastService: '2022-01-01',
+      nextService: '2022-06-01',
+      mileage: 50000,
+      assignedDriver: 'John Doe',
+    },
+    {
+      id: '2',
+      model: 'Honda Civic',
+      plate: 'DEF456',
+      status: 'maintenance' as const,
+      lastService: '2022-02-01',
+      nextService: '2022-07-01',
+      mileage: 60000,
+      assignedDriver: 'Jane Doe',
+    },
+    {
+      id: '3',
+      model: 'Ford Focus',
+      plate: 'GHI789',
+      status: 'inactive' as const,
+      lastService: '2022-03-01',
+      nextService: '2022-08-01',
+      mileage: 70000,
+      assignedDriver: 'Bob Smith',
+    },
   ];
 
   const handleCreateFleet = (data: any) => {
@@ -130,12 +163,18 @@ export const FleetManagement: React.FC = () => {
 
         <div className="p-6">
           {activeTab === 'overview' && (
-            <div>Overview content here</div>
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900">Fleet Overview</h2>
+              <p className="text-gray-600">Total Vehicles: 45</p>
+              <p className="text-gray-600">Active Drivers: 38</p>
+              <p className="text-gray-600">Average Trip Time: 28 mins</p>
+              <p className="text-gray-600">Fleet Rating: 4.8</p>
+            </div>
           )}
 
           {activeTab === 'vehicles' && (
             <FleetVehicleList
-              vehicles={[]}
+              vehicles={vehicles}
               onAssignDriver={handleAssignDriver}
               onScheduleMaintenance={handleScheduleMaintenance}
             />
